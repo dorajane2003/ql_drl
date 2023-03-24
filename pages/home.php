@@ -1,7 +1,8 @@
 
 <?php
    function check_exist_list($value, $list2, $label){
-        foreach ($list2 as $tc1){
+        
+    foreach ($list2 as $tc1){
             if ($value == $tc1[$label])
                 return true;
         }
@@ -57,7 +58,7 @@
             $temp = "id_tc2={$tc2['id_tc2']}";
             if (!isset($_POST[$temp])){
                 if (check_exist_list($tc2['id_tc2'],$list_tc3,'id_tc2')==false)
-                    $error_diem[$temp] = $temp;
+                    $error_diem[$temp] = "Tiêu chí ".$tc2['nd_tc2']." chưa nhập điểm";
             }else{
                 if (check_exist_list($tc2['id_tc2'],$list_tc3,'id_tc2')== false){
                     $temp_value = (int)$_POST[$temp];
@@ -71,12 +72,44 @@
 
        foreach($list_tc3 as $tc3){
             $temp = "id_tc3={$tc3['id_tc3']}";
-            if (isset($_POST[$temp])){
-                $temp_value = (int)$_POST[$temp];
-                if ($temp_value > $tc3['diem_max_tc3'])
-                    $error_diem[$temp] = "Tiêu chí ".$tc3['nd_tc3']." vượt quá điểm tối đa";
-                else
-                    $diem[$temp] =  $temp_value;    
+            if ($tc3['id_tc2'] == 1){
+                if (isset($_POST['dtb'])){
+                    $dtb = $_POST['dtb'];
+                }
+                else 
+                    $error_diem['dtb']="Bạn chưa chọn điểm!";
+            }
+            else
+                if (!empty($_POST[$temp])){
+                    $temp_value = (int)$_POST[$temp];
+                        if ($temp_value > $tc3['diem_max_tc3'])
+                            $error_diem[$temp] = "Tiêu chí ".$tc3['nd_tc3']." vượt quá điểm tối đa";
+                        else
+                            $diem[$temp] =  $temp_value;    
+                }
+                else 
+                if (empty($_POST[$temp]))
+                    $error_diem[$temp] = "Tiêu chí ".$tc3['nd_tc3']." chưa nhập điểm";
+        }
+       
+       if (empty($error_diem)){
+            foreach ($list_tc1 as $tc){
+                foreach($list_tc2 as $tc2){
+                    $temp = "id_tc2={$tc2['id_tc2']}";
+                    if (!isset($_POST[$temp])){
+                        if (check_exist_list($tc2['id_tc2'],$list_tc3,'id_tc2')==false)
+                            $error_diem[$temp] = $temp;
+                    }else{
+                        if (check_exist_list($tc2['id_tc2'],$list_tc3,'id_tc2')== false){
+                            $temp_value = (int)$_POST[$temp];
+                            if ($temp_value > $tc2['diem_max_tc2'])
+                                $error_diem[$temp] = "Tiêu chí ".$tc2['nd_tc2']." vượt quá điểm tối đa";
+                            else
+                                $diem[$temp] =  $temp_value;    
+                        }
+                    }
+            } 
+
             }
        }
     }
@@ -96,16 +129,14 @@
 <div id="container">
     <div id="form_chamdiem">
         <form action="" method="POST">
-            
+            <div class="error_diem">
                 <?php
                     if (!empty($error_diem)){
-                        $temp = $error_diem;
-                        foreach ($temp as $value)
-                        echo '<script type="text/javascript">
-                                alert("'.$value.'");
-                            </script>';
+                        foreach ($error_diem as $value)
+                        echo "<p>{$value}</p>";
                     }
-                    ?>     
+                ?>      
+            </div>
                    
                     
         <table>
@@ -138,11 +169,13 @@
                             ?>
                             <td class="">
                                 <input type="number" name="<?php echo "id_tc2=".$tc2['id_tc2']; ?>" placeholder="nhập điểm" 
-                                                            value="<?php 
+                                                            value="
+                                                            <?php 
                                                             $temp = "id_tc2={$tc2['id_tc2']}";
                                                             if (empty($error_diem[$temp]))
+                                                            if (!empty($diem[$temp]))
                                                                 echo  $diem[$temp];
-                                                            ;?>">
+                                                            ?>">
                                 
                             </td>
                         <?php } 
@@ -159,16 +192,23 @@
                             <?php
                             if ($tc3['id_tc2']==1){
                             ?>
-                             <td><input type="radio" name="dtb"> </td>
+                             <td><input type="radio" name="dtb" 
+                                                            <?php 
+                                                            if (empty($error_diem['dtb']))
+                                                                if (!empty($diem['dtb']))
+                                                                    echo  'checked="checked" ';
+                                                            ?>> 
+                            </td>
                              <?php
                             }else{
                              ?>
                             <td><input type="number" name="<?php echo "id_tc3=".$tc3['id_tc3']; ?>" id="" placeholder="nhập điểm" 
-                                value="<?php 
-                                                $temp = "id_tc3={$tc3['id_tc3']}";
-                                                        if (empty($error_diem[$temp]))
-                                                            echo  $diem[$temp];;
-                                                ?>">
+                            <?php 
+                                                            if (empty($error_diem['dtb']))
+                                                                if (!empty($diem['dtb']))
+                                                                    echo  'checked="checked"';
+                                                            ?>
+                                    >
                             </td>
                         </tr>
                 <?php
