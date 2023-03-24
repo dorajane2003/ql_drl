@@ -2,15 +2,29 @@
 <?php
    function check_exist_list($value, $list2, $label){
         foreach ($list2 as $tc1){
-            if ($value == $tc1[ $label])
+            if ($value == $tc1[$label])
                 return true;
         }
     return false;
 }
 
     function check_bac($string){
-        $subString = substr($string,0,3);
+        $subString = substr($string,0,4);
         echo $subString;
+        switch ($subString){
+            case "tc1=":
+                return 1;
+                break;
+
+            case "tc2=":
+                return 2;
+                break;
+
+            case "tc3=":
+                return 3;
+                break;
+            
+        }
     }
 
     function getList($sql_String){
@@ -31,12 +45,41 @@
    
     $list_tc1 = getList($sql_tc1);
     $list_tc2 = getList($sql_tc2);
+    
     $list_tc3 = getList($sql_tc3);
-    
-    
-    // if (isset($_POST['btn_submit'])){
+    $dem_tc2 = 0;
+    $dem_tc3 = 0;
+    unset($error_diem); 
+    $error_diem = array();
+    $diem = array();
+    if (isset($_POST['btn_submit'])){
+       foreach($list_tc2 as $tc2){
+            $temp = "id_tc2={$tc2['id_tc2']}";
+            if (!isset($_POST[$temp])){
+                if (check_exist_list($tc2['id_tc2'],$list_tc3,'id_tc2')==false)
+                    $error_diem[$temp] = $temp;
+            }else{
+                if (check_exist_list($tc2['id_tc2'],$list_tc3,'id_tc2')== false){
+                    $temp_value = (int)$_POST[$temp];
+                    if ($temp_value > $tc2['diem_max_tc2'])
+                        $error_diem[$temp] = "Tiêu chí ".$tc2['nd_tc2']." vượt quá điểm tối đa";
+                    else
+                        $diem[$temp] =  $temp_value;    
+                }
+            }
+       }
 
-    // }
+       foreach($list_tc3 as $tc3){
+            $temp = "id_tc3={$tc3['id_tc3']}";
+            if (isset($_POST[$temp])){
+                $temp_value = (int)$_POST[$temp];
+                if ($temp_value > $tc3['diem_max_tc3'])
+                    $error_diem[$temp] = "Tiêu chí ".$tc3['nd_tc3']." vượt quá điểm tối đa";
+                else
+                    $diem[$temp] =  $temp_value;    
+            }
+       }
+    }
 ?>
 <style>
     table{
@@ -49,12 +92,23 @@
     input[type=number]{
         border: none;
     }
-
 </style>
 <div id="container">
     <div id="form_chamdiem">
         <form action="" method="POST">
-            <table>
+            
+                <?php
+                    if (!empty($error_diem)){
+                        $temp = $error_diem;
+                        foreach ($temp as $value)
+                        echo '<script type="text/javascript">
+                                alert("'.$value.'");
+                            </script>';
+                    }
+                    ?>     
+                   
+                    
+        <table>
                 <tr>
                     <td>NỘI DUNG ĐÁNH GIÁ</td>
                     <td>Điểm SV tự đánh giá</td>
@@ -72,14 +126,24 @@
                 ?>
                     <tr>
                         <td><?php echo $tc2['nd_tc2']; ?></td>
+                        
                         <?php
+                        
                         $temp ='id_tc2';
                         if (check_exist_list($tc2['id_tc2'],$list_tc3,$temp) ){
                         ?>  
                             <td></td>
-                        <?php }else{ ?>
+                        <?php }else{ 
+                                $dem_tc2++;
+                            ?>
                             <td class="">
-                                <input type="number" name="<?php echo "id_tc2=".$tc2['id_tc2']; ?>" id="" placeholder="nhập điểm">
+                                <input type="number" name="<?php echo "id_tc2=".$tc2['id_tc2']; ?>" placeholder="nhập điểm" 
+                                                            value="<?php 
+                                                            $temp = "id_tc2={$tc2['id_tc2']}";
+                                                            if (empty($error_diem[$temp]))
+                                                                echo  $diem[$temp];
+                                                            ;?>">
+                                
                             </td>
                         <?php } 
                         }?>
@@ -88,13 +152,27 @@
                 <?php
                     foreach($list_tc3 as $tc3) {
                         if ($tc3['id_tc2'] == $tc2['id_tc2'] && $tc['id_tc1'] == $tc2['id_tc1'] ){
+                            $dem_tc3++;
                 ?>
                         <tr>
                             <td><?php echo $tc3['nd_tc3']; ?></td>
-                            <td><input type="number" name="<?php echo "id_tc3=".$tc3['id_tc3']; ?>" id="" placeholder="nhập điểm"></td>
+                            <?php
+                            if ($tc3['id_tc2']==1){
+                            ?>
+                             <td><input type="radio" name="dtb"> </td>
+                             <?php
+                            }else{
+                             ?>
+                            <td><input type="number" name="<?php echo "id_tc3=".$tc3['id_tc3']; ?>" id="" placeholder="nhập điểm" 
+                                value="<?php 
+                                                $temp = "id_tc3={$tc3['id_tc3']}";
+                                                        if (empty($error_diem[$temp]))
+                                                            echo  $diem[$temp];;
+                                                ?>">
+                            </td>
                         </tr>
                 <?php
-                    }
+                    }}  
                  }
                 }
             }
@@ -106,6 +184,3 @@
     </div>
 </div>
 
-<?php
-require "inc/footer.php";
-?>

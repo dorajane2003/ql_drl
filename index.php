@@ -5,7 +5,6 @@
     // unset($_SESSION['is_login']);
     // unset($_SESSION['user_login']);
 
-    
     if (!isset($_SESSION['is_login']))
         require "pages/login.php";
     else

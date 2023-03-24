@@ -41,6 +41,14 @@
              $password_user = $_POST['password_user'];
         
         if (empty($error)){
+            // print_r($list_sv);
+            // echo "<br>";
+            // echo $id_user."<br>";
+            // echo $password_user;
+            // echo "<br>";
+            // echo  $list_sv[0]['mat_khau'];
+            // echo  $list_sv[1]['maso'];
+            
             if (check_login($list_sv,$id_user, $password_user)){
                     $_SESSION['is_login'] = true;
                     $_SESSION['user_login'] = $id_user;
