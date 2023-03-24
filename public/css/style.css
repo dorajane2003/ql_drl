@@ -12,7 +12,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
 }
 #header_section{
     border-bottom: 2px solid #ddd;
@@ -64,4 +64,36 @@ body{
     border: none;
     color: #fff;
     box-sizing: border-box;
+}
+
+#form_chamdiem{
+    width:900px;   
+}
+#form_chamdiem > table{
+   
+}
+.thongbao_submit{
+    text-align: right;
+    margin-top:10px;
+    font-style: italic;
+    color: red;
+}
+
+.btn-submit{
+    display: block;
+    padding:12px 32px;
+    color:#fff;
+    font-size: 20px;
+    background-color: #156da7;
+    border: none;
+    border-radius: 5px;
+    margin: 10px 0 50px;
+    float: right;
+}
+
+.error{
+    color:red;
+    text-align: center;
+    font-style: italic;
+    margin:10px 0;
 }
