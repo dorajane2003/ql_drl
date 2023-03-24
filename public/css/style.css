@@ -9,13 +9,14 @@ body{
 }
 
 #container{
+    font-family: 'Times New Roman', Times, serif;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    min-height: 30vh;
 }
-#header_section{
-    border-bottom: 2px solid #ddd;
+.error_diem{
+    -webkit-text-fill-color: red;
 }
 .header-content{
     width:900px;
@@ -67,16 +68,14 @@ body{
 }
 
 #form_chamdiem{
-    width:900px;   
-}
-#form_chamdiem > table{
-   
+    width:1006px;   
 }
 .thongbao_submit{
     text-align: right;
     margin-top:10px;
     font-style: italic;
     color: red;
+    padding-right: 10px;
 }
 
 .btn-submit{

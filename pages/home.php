@@ -124,30 +124,31 @@
 
 <style>
     table{
-    border: none;
-    border-collapse: separate;
-    box-sizing: border-box;
-    text-indent: initial;
-    border-spacing: 2px;
-    border-color: gray;
-    width: 100%;
+        border: none;
+        border-collapse: collapse;
+        box-sizing: border-box;
+        text-indent: initial;
+        border-spacing: 2px;
+        border-color: gray;
+        width: 100%;
     }
-    td{
-    
-    border: 1px solid #000;
-    /* border-left: 1px solid #000; */
+    td, th {
+        border: 1px solid;
     }
     .Pdrl td{
-        font-size: 15px;
-        padding: 10px 10px;
-
+        font-size: 16px;
+        padding: 5px 5px;
+    }
+    .Pdrl th{
+        font-size: 18px;
+        text-align: center;
     }
     input[type=number]{
         border: none;
     }
 </style>
 <div id="container">
-    <div id="form_chamdiem">
+    <div id="form_chamdiem" class="glass">
         <form action="" method="POST">
         <div class="error_diem">
                 <?php
@@ -182,8 +183,8 @@
                     <td colspan="2" style="height:60px;font-size:25px;color:#07456c; text-align: center; border:none"><b>PHIẾU CHẤM ĐIỂM RÈN LUYỆN</b> </td>
                 </tr>
                 <tr style="height:50px;">
-                    <td ><b>NỘI DUNG ĐÁNH GIÁ</b> </td>
-                    <td ><b>Điểm SV tự đánh giá</b> </td>
+                    <th>NỘI DUNG ĐÁNH GIÁ</th>
+                    <th>Điểm SV tự đánh giá</th>
                 </tr>
             <?php
                 foreach ($list_tc1 as $tc){
