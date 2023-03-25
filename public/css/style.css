@@ -9,8 +9,8 @@ body{
 }
 
 #container{
+    padding-top: 5%;
     font-family: 'Times New Roman', Times, serif;
-    display: flex;
     justify-content: center;
     align-items: center;
     min-height: 30vh;
@@ -33,6 +33,13 @@ body{
     margin:10px 0;
     color:#105582;
 }
+.welcome{
+    text-align: center;
+    -webkit-text-fill-color: rgb(22,73,118);
+    padding-bottom: 2%;
+    font-size: 24px;
+    font-weight: bold;
+}
 #login{
     width: 300px;
     border: 1px solid #ddd;
@@ -54,21 +61,31 @@ body{
 
 #login > label{
     margin:15px 0 5px;
+    font-weight: bold;
 }
 
 #login > input[type=submit]{
     margin: 10px auto;
     display: block;
     font-size: 20px;  
-    background-color: #007BFF;
+    background-color: rgb(22,73,118);
     border-radius: 5px;
     border: none;
     color: #fff;
     box-sizing: border-box;
 }
-
+#login > input[type=submit]:hover{
+    background-color: lightblue;
+    -webkit-text-fill-color: rgb(22,73,118);
+    border: #105582;
+}
 #form_chamdiem{
     width:1006px;   
+}
+#id_user, #password_user{
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
 }
 .thongbao_submit{
     text-align: right;
@@ -83,7 +100,7 @@ body{
     padding:12px 32px;
     color:#fff;
     font-size: 20px;
-    background-color: #156da7;
+    background-color: rgb(22,73,118);
     border: none;
     border-radius: 5px;
     margin: 10px 0 50px;

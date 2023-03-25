@@ -60,7 +60,8 @@
 ?>
 
 <div id="container">
-    <form id="login" method="POST">
+    <div class="welcome">Chào mừng bạn đến với hệ thống điểm rèn luyện của trường ĐHSG</div>
+    <form id="login" method="POST" class="glass">
                 <label for="id_user">Mã số sinh viên</label>
                 <input type="text" name="id_user" id="id_user" value="<?php if (!empty($id_user)) echo $id_user;?>">
                 <p class="error">
