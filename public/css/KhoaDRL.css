@@ -1,0 +1,24 @@
+.drl-base{
+    border: solid 1px #dcdbdb;
+    float: left;
+    width: 100%;
+    color: #000000;
+    margin: 0;
+    text-align: center;
+    padding-bottom: 5px;
+}
+ul{
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+}
+ul p{
+    padding-left: 10px;
+}
+ul li{
+    border: 1px solid gray;
+}
+
+.drl-table li{
+    padding: 0;
+}

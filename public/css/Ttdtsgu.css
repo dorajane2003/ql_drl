@@ -1,0 +1,85 @@
+body{
+    font-family: tahoma,verdana;
+    padding: 0;
+    margin: 0;
+    font-size: 9pt;
+    text-align: left;
+}
+.base{
+    width: 1006px;
+    margin: 0;
+    padding: 0;
+    background: #ffffff;
+    text-align: left;
+    height: 700px;
+}
+table{
+    border-collapse: separate;
+    box-sizing: border-box;
+    text-indent: initial;
+    border-spacing: 2px;
+    border-color: gray;
+    width: 100%;
+}
+tbody{
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+tr{
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}
+td{
+    display: table-cell;
+    vertical-align: inherit;
+}
+.menu{
+    height: 42px;
+    margin: 0;
+    color: #07456c;
+    font-size: 8pt;
+    font-weight: bold;
+}
+.out-menu{
+    float: left;
+    height: 42px;
+    line-height: 55px;
+    margin: 0 8px;
+}
+.navigate-base{
+    border: solid 1px #dcdbdb;
+    float: left;
+    width: 100%;
+    color: #000000;
+    margin: 0;
+    text-align: center;
+    padding-bottom: 5px;
+}
+.title{
+    color: #000000;
+    font-size: 9pt;
+    font-weight: bold;
+    height: 28px;
+    line-height: 28px;
+    text-align: left;
+}
+.Label{
+    font-size: 8pt;
+    font-family: Tahoma;
+}
+p{
+    font-size: 15px;
+    padding: 1px 0px;
+}
+a{
+    color: #07456c;
+    text-decoration: none;
+}
+a:hover{
+    color: red;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 0 1px red;
+}
